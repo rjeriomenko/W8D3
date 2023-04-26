@@ -36,4 +36,26 @@ class Clock {
     };
 };
     
-const clock = new Clock();
+// const clock = new Clock();
+
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function addNumbers(sum, numsLeft, completionCallback) {
+    if(numsLeft === 0) {
+        rl.close()
+        return completionCallback(sum);
+    };
+
+    if(numsLeft > 0) {
+        rl.question("Enter a number:", answer => {
+            return addNumbers(sum + parseInt(answer), numsLeft - 1, completionCallback);
+        });
+    };
+
+};
+
+addNumbers(0, 3, sum => console.log(`Total Sum: ${sum}`));
